@@ -10,33 +10,42 @@ You ask the board a strategic question. Claude picks 2-3 board members most rele
 
 On first use, Claude asks a few short questions about your business (or you can point it at a doc you already have) and saves the answers. Every future session loads that context automatically, so the board's advice is grounded in *your* business — currency, scale, customer, and constraints — not generic playbook fluff.
 
-## Install
+## Installation
 
-Requires [Claude Code](https://claude.ai/code).
+Requires [Claude Code](https://claude.ai/code). Pick whichever path is easiest.
 
-**One-liner (recommended):**
+### The easy path: tell Claude Code
+
+Open Claude Code in any project and paste:
+
+```
+Install the eCom Advisory Board skill from https://github.com/slingshotai/ecom-advisory-board — follow the README install instructions.
+```
+
+Claude will clone the repo into `~/.claude/skills/ecom-advisory-board/` and confirm it's done. Start a new Claude Code session and the board is available.
+
+### The manual path (git)
+
+```bash
+# 1. Clone the repo into your skills folder
+mkdir -p ~/.claude/skills
+cd ~/.claude/skills
+git clone https://github.com/slingshotai/ecom-advisory-board.git
+
+# 2. Verify it landed
+ls ~/.claude/skills/ecom-advisory-board
+# Should list: SKILL.md, README.md, references/, etc.
+```
+
+Start a new Claude Code session and the board is available.
+
+### No git? Curl-pipe install
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/slingshotai/ecom-advisory-board/main/install.sh | bash
 ```
 
-Copies the skill to `~/.claude/skills/ecom-advisory-board/`. Restart Claude Code (or start a new session) and the board is available.
-
-**Prefer to read the script first?**
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/slingshotai/ecom-advisory-board/main/install.sh -o install.sh
-less install.sh
-bash install.sh
-```
-
-**From a clone:**
-
-```bash
-git clone https://github.com/slingshotai/ecom-advisory-board.git
-cd ecom-advisory-board
-bash install.sh
-```
+Downloads just the skill files into `~/.claude/skills/ecom-advisory-board/` (no `.git` folder).
 
 ## Use
 
