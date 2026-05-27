@@ -14,13 +14,29 @@ On first use, Claude asks a few short questions about your business (or you can 
 
 Requires [Claude Code](https://claude.ai/code).
 
+**One-liner (recommended):**
+
 ```bash
+curl -fsSL https://raw.githubusercontent.com/slingshotai/ecom-advisory-board/main/install.sh | bash
+```
+
+Copies the skill to `~/.claude/skills/ecom-advisory-board/`. Restart Claude Code (or start a new session) and the board is available.
+
+**Prefer to read the script first?**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/slingshotai/ecom-advisory-board/main/install.sh -o install.sh
+less install.sh
 bash install.sh
 ```
 
-That copies the skill to `~/.claude/skills/ecom-advisory-board/`. Restart Claude Code (or start a new session) and the board is available.
+**From a clone:**
 
-Manual alternative: copy `SKILL.md` and the `references/` folder to `~/.claude/skills/ecom-advisory-board/`.
+```bash
+git clone https://github.com/slingshotai/ecom-advisory-board.git
+cd ecom-advisory-board
+bash install.sh
+```
 
 ## Use
 

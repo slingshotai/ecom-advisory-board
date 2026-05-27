@@ -3,13 +3,18 @@
 # eCom Advisory Board — installer
 # Copies the skill into ~/.claude/skills/ so Claude Code can discover it.
 #
+# Works two ways:
+#   1. Locally (from a cloned repo):  bash install.sh
+#   2. Remotely (over the network):   curl -fsSL <raw-url>/install.sh | bash
+#
 # Re-running this script is safe — it overwrites the installed skill with
-# the current version in this folder.
+# the latest version.
 
 set -euo pipefail
 
-SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 INSTALL_DIR="${HOME}/.claude/skills/ecom-advisory-board"
+REPO_RAW="https://raw.githubusercontent.com/slingshotai/ecom-advisory-board/main"
+MEMBERS=(bezos buffett grove hormozi jobs matt walton)
 
 if [[ ! -d "${HOME}/.claude" ]]; then
   echo "Error: ~/.claude/ does not exist. Is Claude Code installed?"
@@ -18,9 +23,25 @@ fi
 
 mkdir -p "${INSTALL_DIR}/references"
 
-cp "${SOURCE_DIR}/SKILL.md" "${INSTALL_DIR}/SKILL.md"
-cp "${SOURCE_DIR}/references/"*.md "${INSTALL_DIR}/references/"
+# Detect mode: local (script sitting next to the files) vs remote (curl-piped)
+SCRIPT_DIR=""
+if [[ -n "${BASH_SOURCE[0]:-}" ]]; then
+  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd || echo "")"
+fi
 
+if [[ -n "${SCRIPT_DIR}" && -f "${SCRIPT_DIR}/SKILL.md" ]]; then
+  echo "Installing from local source: ${SCRIPT_DIR}"
+  cp "${SCRIPT_DIR}/SKILL.md" "${INSTALL_DIR}/SKILL.md"
+  cp "${SCRIPT_DIR}/references/"*.md "${INSTALL_DIR}/references/"
+else
+  echo "Installing from ${REPO_RAW}"
+  curl -fsSL "${REPO_RAW}/SKILL.md" -o "${INSTALL_DIR}/SKILL.md"
+  for member in "${MEMBERS[@]}"; do
+    curl -fsSL "${REPO_RAW}/references/${member}.md" -o "${INSTALL_DIR}/references/${member}.md"
+  done
+fi
+
+echo ""
 echo "eCom Advisory Board installed:"
 echo "  ${INSTALL_DIR}"
 echo ""
