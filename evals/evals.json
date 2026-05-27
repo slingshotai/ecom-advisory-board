@@ -1,0 +1,26 @@
+{
+  "skill_name": "ecom-advisory-board",
+  "evals": [
+    {
+      "id": 1,
+      "name": "first-use-onboarding-then-board",
+      "prompt": "I run a speciality coffee brand doing about £1.2M/year. I'm thinking about launching a subscription box. What would the board say?",
+      "expected_output": "Skill triggers because the user said 'the board'. No my-business.md exists, so the skill runs first-use onboarding — extracts the partial context from the prompt (coffee brand, £1.2M, considering subscription), asks only the still-missing fields rather than re-asking what was already given, writes ./my-business.md, confirms with the user. Then selects 2-3 relevant members (likely Hormozi for offer/subscription mechanics, Bezos for customer-centric subscription thinking, and Matt for implementation reality at £1.2M scale), reads only those reference files, and produces in-character responses ending with a Key Themes & Actions section. Session is saved to ./advisory-board-sessions/.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "debate-command-shows-tension",
+      "prompt": "DEBATE: should I hire a full-time marketing manager or work with an agency for the next 6 months?",
+      "expected_output": "Skill triggers on DEBATE command. Pulls existing my-business.md context (or runs onboarding if absent). Selects 2-3 members with genuinely conflicting views — e.g. Hormozi (speed + in-house ownership) vs Matt (bandwidth reality + agency as a force multiplier) vs Grove (process discipline). Responses must show real tension, not forced consensus. Key Themes section captures the tensions honestly without resolving them artificially. Session saved.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "deep-dive-single-member",
+      "prompt": "DEEP DIVE Matt — we're considering acquiring a small homeware brand doing £400k/year for £180k. Worth doing?",
+      "expected_output": "Skill triggers on DEEP DIVE Matt. Reads only references/matt.md (no other personas). Produces an extended 4-6 paragraph response in Matt's voice (operator lens, Slingshot Framework references, real-world implementation thinking, signature questions about 'who's actually going to run this acquired brand'). References buyability and the gap between acquisition price and integration cost. Session saved with participants: [Matt].",
+      "files": []
+    }
+  ]
+}
